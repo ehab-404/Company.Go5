@@ -4,11 +4,12 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Company.Go5.DAL.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Company.Go5.DAL.Data.Contexts
 {
-    internal class CompanyDbContext:DbContext
+    public class CompanyDbContext:DbContext
     {
 
         public CompanyDbContext() : base()
@@ -21,6 +22,10 @@ namespace Company.Go5.DAL.Data.Contexts
 
             base.OnModelCreating(modelBuilder);
         }
+
+        DbSet<Department> Departments {  get; set; }    
+        
+
 
     }
 }
