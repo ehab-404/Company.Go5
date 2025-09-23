@@ -1,3 +1,8 @@
+using Company.Go5.BLL.Interfaces;
+using Company.Go5.BLL.Repositories;
+using Company.Go5.DAL.Data.Contexts;
+using Microsoft.EntityFrameworkCore;
+
 namespace Company.Go5.PLMVC
 {
     public class Program
@@ -8,6 +13,20 @@ namespace Company.Go5.PLMVC
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //ask clr to create object of DepartmentRepository
+            //when assigning it reference of type of IDepartmentRepository
+
+            builder.Services.AddScoped<IDepartmentRepository,DepartmentRepository>();
+            //allow DI for CompanyDbContext 
+            builder.Services.AddDbContext<CompanyDbContext>(
+
+                options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"))
+                            
+
+            );
+
+
 
             var app = builder.Build();
 
