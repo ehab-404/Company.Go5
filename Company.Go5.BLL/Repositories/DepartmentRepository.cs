@@ -14,6 +14,8 @@ namespace Company.Go5.BLL.Repositories
 
         private readonly CompanyDbContext context;
 
+        //ask clr to create object of type CompanyDbContext
+        //when assigning it reference of same type of CompanyDbContext
         public DepartmentRepository(CompanyDbContext _context) 
         {
         context = _context;
@@ -26,27 +28,28 @@ namespace Company.Go5.BLL.Repositories
 
         public Department? GetById(int id)
         {
-            return context.Departments.Find(x => x.Id == id);
+
+            return context.Departments.Find(id);
 
         }
 
         public int Add(Department department)
         {
-          context.Departments.Add(department);
-          return context.SaveChanges();
+            context.Departments.Add(department);
+            return context.SaveChanges();
         }
 
         public int Delete(Department department)
         {
-            context.Departments.Delete(department);
+            context.Departments.Remove(department);
             return context.SaveChanges();
         }
 
-       
+
 
         public int Update(Department department)
         {
-            context.Departments.Update(department);
+           context.Departments.Update(department);
             return context.SaveChanges();
         }
     }

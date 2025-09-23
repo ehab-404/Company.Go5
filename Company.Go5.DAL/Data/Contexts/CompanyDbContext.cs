@@ -12,7 +12,7 @@ namespace Company.Go5.DAL.Data.Contexts
     public class CompanyDbContext:DbContext
     {
 
-        public CompanyDbContext() : base()
+        public CompanyDbContext(DbContextOptions<CompanyDbContext> options) : base(options)
         { 
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -23,7 +23,14 @@ namespace Company.Go5.DAL.Data.Contexts
             base.OnModelCreating(modelBuilder);
         }
 
-        DbSet<Department> Departments {  get; set; }    
+        public DbSet<Department> Departments { get; set; }
+        
+
+
+
+
+
+
         
 
 
