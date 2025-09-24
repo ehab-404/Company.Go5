@@ -51,15 +51,6 @@ namespace Company.Go5.PLMVC.Controllers
 
             }
 
-            
-
-            
-
-
-
-
-
-
             return RedirectToAction(nameof(Index) );
 
         }
