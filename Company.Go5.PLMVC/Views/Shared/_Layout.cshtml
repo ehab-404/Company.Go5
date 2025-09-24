@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="~/Company.Go5.PLMVC.styles.css" asp-append-version="true" />
 </head>
 <body>
+    @*start header*@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
@@ -26,22 +27,44 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+
+
+
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Department" asp-action="Index">Department</a>
+                        </li>
+
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+    
+   @*end header*@
+    
+
+    @*start body*@
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
+
+    @*end body*@
+
+
+    @*start footer*@
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2025 - Company.Go5.PLMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+    
+    @*end footer*@
+    
+    
+    
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
