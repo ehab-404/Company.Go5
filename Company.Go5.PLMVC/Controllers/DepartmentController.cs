@@ -1,4 +1,4 @@
-﻿using Company.Go5.BLL.Interfaces;
+using Company.Go5.BLL.Interfaces;
 using Company.Go5.BLL.Repositories;
 using Company.Go5.DAL.Models;
 using Company.Go5.PLMVC.Dtos;
@@ -26,5 +26,43 @@ namespace Company.Go5.PLMVC.Controllers
 
             return View(departments);
         }
+
+        [HttpGet]
+        public IActionResult Create()
+        {
+
+            return View();
+
+        }
+
+        [HttpPost]
+        public IActionResult Create(DepartmentDto department)
+        {
+            if(ModelState.IsValid) //server side validation 
+            {
+                //manual mapping 
+                var NewDepartment = new Department
+                {
+                    Code = department.Code,
+                    Name = department.Name,
+                    CreateAt = department.CreateAt
+                };
+                _departmentRepository.Add(NewDepartment);
+
+            }
+
+            
+
+            
+
+
+
+
+
+
+            return RedirectToAction(nameof(Index) );
+
+        }
     }
 }
+
