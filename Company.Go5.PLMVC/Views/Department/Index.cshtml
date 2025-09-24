@@ -45,8 +45,14 @@
                     <td>@item.Code</td>
                     <td>@item.Name</td>
                     <td>@item.CreateAt</td>
-                    <td> 
-                        <a asp-action="Details"  asp-controller="Department" class="btn btn-warning" > Details </a>
+                    <td>
+                        <a asp-action="Details"
+                           asp-controller="Department"
+                          @*  asp-all-route-data="" *@
+                           class="btn btn-warning">
+                            Details
+                        </a>
+
                     </td>
 
 

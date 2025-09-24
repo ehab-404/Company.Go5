@@ -1,4 +1,4 @@
-﻿@model
+﻿@model DepartmentDto
 @{
     ViewData["Title"] = "Details";
 }
@@ -10,7 +10,30 @@
     <div class="my-3" >
 
         <label asp-for="Code"></label>
-        <input/>
+        <input asp-for="Code"/>
+       
+
+    </div>
+
+    <div class="my-3">
+
+        <label asp-for="Code"></label>
+        <input asp-for="Code" />
+        
+
+    </div>
+
+    <div class="my-3">
+
+        <label asp-for="Code"></label>
+        <input asp-for="Code" />
+       
+
+    </div>
+
+    <div class="my-3">
+
+        <a asp-action="Index" class="btn-primary">Back To List</a>
 
     </div>
 
