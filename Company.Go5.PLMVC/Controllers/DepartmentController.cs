@@ -13,9 +13,9 @@ namespace Company.Go5.PLMVC.Controllers
         //ask clr to create object of DepartmentRepository
         //when assigning it reference of type of IDepartmentRepository
         //by making dependency injection in services region 
-        public DepartmentController(IDepartmentRepository departmentRepository)
-        {
-
+        public DepartmentController(IDepartmentRepository departmentRepository) 
+        { 
+        
             _departmentRepository = departmentRepository;
         }
 
@@ -38,7 +38,7 @@ namespace Company.Go5.PLMVC.Controllers
         [HttpPost]
         public IActionResult Create(DepartmentDto department)
         {
-            if (ModelState.IsValid) //server side validation 
+            if(ModelState.IsValid) //server side validation 
             {
                 //manual mapping 
                 var NewDepartment = new Department
@@ -51,12 +51,13 @@ namespace Company.Go5.PLMVC.Controllers
 
             }
 
+            
 
+            
 
-
-
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index) );
 
         }
     }
 }
+
