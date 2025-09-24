@@ -6,6 +6,7 @@ namespace Company.Go5.PLMVC.Dtos
     {
 
         //client side validation 
+        [Required(ErrorMessage = "code is required ")]
         [Required(ErrorMessage ="code is required ")]
         public string Code { get; set; }
 
