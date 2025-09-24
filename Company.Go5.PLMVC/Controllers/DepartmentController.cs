@@ -24,5 +24,12 @@ namespace Company.Go5.PLMVC.Controllers
 
             return View(departments);
         }
+
+        [HttpGet]
+
+        public IActionResult Details(int id)
+        {
+            return View();
+        }
     }
 }
