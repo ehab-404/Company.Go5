@@ -54,6 +54,32 @@ namespace Company.Go5.PLMVC.Controllers
             return RedirectToAction(nameof(Index) );
 
         }
+
+
+
+        [HttpGet]
+
+        public IActionResult Details(int?id)
+        {
+
+            if(id is null) { return BadRequest("id required "); }
+
+            var department = _departmentRepository.GetById(id.Value);
+            if(department is null) { return NotFound($"no department with this id {id}") ; }
+
+
+            var DepartmentDto = new DepartmentDto()
+            {
+
+                Code=department.Code,
+                Name=department.Name,
+                CreateAt = department.CreateAt
+
+
+            };
+
+            return View(DepartmentDto);
+        }
     }
 }
 
