@@ -9,31 +9,33 @@
 
     <div class="my-3" >
 
-        <label asp-for="Code"></label>
-        <input asp-for="Code"/>
+        <label asp-for="Code" class="col-form-label"></label>
+        <input asp-for="Code"  class="form-control" readonly />
        
 
     </div>
 
     <div class="my-3">
 
-        <label asp-for="Code"></label>
-        <input asp-for="Code" />
+        <label asp-for="Name" class="col-form-label"></label>
+        <input asp-for="Name" class="form-control" readonly />
         
 
     </div>
 
     <div class="my-3">
 
-        <label asp-for="Code"></label>
-        <input asp-for="Code" />
+        <label asp-for="CreateAt" class="col-form-label"></label>
+        <input asp-for="CreateAt" class="form-control" readonly/>
        
 
     </div>
 
     <div class="my-3">
 
-        <a asp-action="Index" class="btn-primary">Back To List</a>
+        <a asp-action="Index" class="btn btn-primary">Back To List</a>
+
+        <a asp-action="Edit" class="btn btn-warning">Edit</a>
 
     </div>
 

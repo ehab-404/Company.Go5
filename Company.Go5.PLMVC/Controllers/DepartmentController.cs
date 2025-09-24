@@ -27,6 +27,8 @@ namespace Company.Go5.PLMVC.Controllers
             return View(departments);
         }
 
+
+
         [HttpGet]
         public IActionResult Create()
         {
@@ -38,7 +40,7 @@ namespace Company.Go5.PLMVC.Controllers
         [HttpPost]
         public IActionResult Create(DepartmentDto department)
         {
-            if(ModelState.IsValid) //server side validation 
+            if (ModelState.IsValid) //server side validation 
             {
                 //manual mapping 
                 var NewDepartment = new Department
@@ -51,13 +53,37 @@ namespace Company.Go5.PLMVC.Controllers
 
             }
 
-            
 
-            
 
-            return RedirectToAction(nameof(Index) );
+
+
+            return RedirectToAction(nameof(Index));
 
         }
+
+        [HttpGet]
+
+        public IActionResult Details(int? id)
+        {
+
+            if(id is null) { return BadRequest("id is required to access department"); }
+
+            var department = _departmentRepository.GetById(id.Value);
+
+            if(department is null) { return NotFound($"no department with id :{id}"); }
+
+            var DepartmentDto = new DepartmentDto()
+            {
+
+                Code = department.Code,
+                Name = department.Name,
+                CreateAt = department.CreateAt
+
+            };
+
+            return View(DepartmentDto);
+
+        }
+        
     }
 }
-
