@@ -87,6 +87,72 @@ namespace Company.Go5.PLMVC.Controllers
 
 
 
+
+        [HttpGet]
+
+        public IActionResult Delete(int? id)
+        {
+
+            if (id is null) { return BadRequest("id required "); }
+
+            var department = _departmentRepository.GetById(id.Value);
+            if (department is null) { return NotFound($"no department with this id {id}"); }
+
+
+            var DepartmentDto = new DepartmentDto()
+            {
+
+                Code = department.Code,
+                Name = department.Name,
+                CreateAt = department.CreateAt
+
+
+            };
+
+            return View(DepartmentDto);
+        }
+
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete( [FromRoute] int id , DepartmentDto DepartmentDto)
+        {
+           
+
+
+            if (!ModelState.IsValid)
+            {
+                return View(DepartmentDto);
+            }
+           
+
+            var department = _departmentRepository.GetById(id);
+
+            if (department == null)
+            {
+                return NotFound();
+            }
+
+
+            var count = _departmentRepository.Delete(department);
+
+            if (count > 0)
+            {
+                return RedirectToAction(nameof(Index));
+
+            }
+
+
+            return NotFound();
+
+
+        }
+
+
+
+
         [HttpGet]
 
         public IActionResult Edit(int? id)
@@ -154,6 +220,9 @@ namespace Company.Go5.PLMVC.Controllers
 
 
         }
+
+
+
 
 
 
