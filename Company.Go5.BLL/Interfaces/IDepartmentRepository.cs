@@ -7,14 +7,14 @@ using Company.Go5.DAL.Models;
 
 namespace Company.Go5.BLL.Interfaces
 {
-    public interface IDepartmentRepository
+    public interface IDepartmentRepository:IGenericRepository<Department>
     {
-        IEnumerable<Department>? GetAll();
-        Department? GetById(int id);
+        //IEnumerable<Department>? GetAll();
+        //Department? GetById(int id);
 
-        int Add(Department department); 
-        int Update(Department department);
-        int Delete(Department department);
+        //int Add(Department department); 
+        //int Update(Department department);
+        //int Delete(Department department);
 
 
 

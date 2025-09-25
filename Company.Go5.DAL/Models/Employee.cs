@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Company.Go5.DAL.Models
 {
-    public class Employee
+    public class Employee:Entity
     {
         public int Id { get; set; } 
 

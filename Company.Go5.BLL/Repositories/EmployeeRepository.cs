@@ -9,11 +9,11 @@ using Company.Go5.DAL.Models;
 
 namespace Company.Go5.BLL.Repositories
 {
-    public class EmployeeRepository : IEmployeeRepository
+    public class EmployeeRepository :GenericRepository<Employee> , IEmployeeRepository
     {
         private readonly CompanyDbContext _dbContext;
 
-        public EmployeeRepository(CompanyDbContext dbContext)
+        public EmployeeRepository(CompanyDbContext dbContext):base(dbContext)
         {
             _dbContext=dbContext;
         }

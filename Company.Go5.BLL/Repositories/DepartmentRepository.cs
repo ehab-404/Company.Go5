@@ -9,14 +9,14 @@ using Company.Go5.DAL.Models;
 
 namespace Company.Go5.BLL.Repositories
 {
-    public class DepartmentRepository : IDepartmentRepository
+    public class DepartmentRepository : GenericRepository<Department>,IDepartmentRepository
     {
 
         private readonly CompanyDbContext context;
 
         //ask clr to create object of type CompanyDbContext
         //when assigning it reference of same type of CompanyDbContext
-        public DepartmentRepository(CompanyDbContext _context) 
+        public DepartmentRepository(CompanyDbContext _context) :base(_context)
         {
         context = _context;
         }

@@ -20,6 +20,11 @@ namespace Company.Go5.PLMVC
             builder.Services.AddScoped<IDepartmentRepository,DepartmentRepository>();
 
             builder.Services.AddScoped<IEmployeeRepository,EmployeeRepository>();
+
+            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+
+
             //allow DI for CompanyDbContext 
             builder.Services.AddDbContext<CompanyDbContext>(
 
