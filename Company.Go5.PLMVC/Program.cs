@@ -18,6 +18,8 @@ namespace Company.Go5.PLMVC
             //when assigning it reference of type of IDepartmentRepository
 
             builder.Services.AddScoped<IDepartmentRepository,DepartmentRepository>();
+
+            builder.Services.AddScoped<IEmployeeRepository,EmployeeRepository>();
             //allow DI for CompanyDbContext 
             builder.Services.AddDbContext<CompanyDbContext>(
 
