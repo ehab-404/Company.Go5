@@ -25,11 +25,14 @@ namespace Company.Go5.DAL.Models
 
         public decimal Salary { get; set; }
 
-        public bool IsDeleted { get; set; }
-
+        public DateTime HiringDate { get; set; }
         public bool IsActive { get; set; }
 
-        public DateTime HiringDate { get; set; }
+        public bool IsDeleted { get; set; }
+
+        
+
+       
 
         public DateTime CreateAt { get; set; }
 
