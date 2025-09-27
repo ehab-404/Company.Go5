@@ -1,11 +1,11 @@
-﻿@model EmployeeDto
+﻿@model Employee
 @{
     ViewData["Title"] = "Details";
 }
 
 <h1>Delete Employee  </h1>
 
-<form  asp-action="Delete">
+<form  asp-action="Delete" asp-route-id="@Model.Id">
 
     <div class="my-3">
 

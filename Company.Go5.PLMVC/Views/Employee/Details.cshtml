@@ -1,4 +1,4 @@
-﻿@model EmployeeDto
+﻿@model Employee
 @{
     ViewData["Title"] = "Details";
 }
@@ -65,7 +65,7 @@
 
         <a asp-action="Index" class="btn btn-primary">Back To List</a>
 
-        <a asp-action="EditForm"  class="btn btn-warning">Edit</a>
+        <a asp-action="EditForm" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
 
     </div>
 

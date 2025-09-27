@@ -1,4 +1,4 @@
-﻿@model EmployeeDto
+﻿@model Employee
 @{
     ViewData["Title"] = "Edit";
 }
@@ -11,7 +11,7 @@
 <br />
 
 
-<form asp-action="Edit"  >
+<form asp-action="Edit" method="post" asp-route-id="@Model.Id">
 
 
 
