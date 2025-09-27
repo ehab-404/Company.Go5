@@ -21,7 +21,9 @@ namespace Company.Go5.BLL.Repositories
         public int Add(Employee employee)
         {
             _dbContext.Add(employee);
-           return _dbContext.SaveChanges();
+           
+
+            return _dbContext.SaveChanges();
 
 
 

@@ -18,7 +18,7 @@ namespace Company.Go5.PLMVC.Controllers
         {
             var employees = _employeeRepository.GetAll();
 
-            return View();
+            return View(employees);
         }
 
         [HttpGet]
@@ -38,21 +38,9 @@ namespace Company.Go5.PLMVC.Controllers
 
             var employee = _employeeRepository.GetById(id);
 
-            var employeeDto = new EmployeeDto
-            {
-                Name = employee.Name,
-                Age = employee.Age,
-                Email = employee.Email,
-                Phone = employee.Phone,
-                Address = employee.Address,
-                Salary = employee.Salary,
-                HiringDate = employee.HiringDate
-            };
 
 
-
-
-            return View(employeeDto);
+            return View(employee);
         }
 
 
@@ -85,6 +73,8 @@ namespace Company.Go5.PLMVC.Controllers
                 };
                 _employeeRepository.Add(employee);
             }
+
+            else { return BadRequest(ModelState); }
             return RedirectToAction(nameof(Index));
         }
 
@@ -108,20 +98,21 @@ namespace Company.Go5.PLMVC.Controllers
                 Salary = employee.Salary,
                 HiringDate = employee.HiringDate
             };
-            return View(employeeDto);
+            return View(employee);
         }
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([FromRoute]int id, EmployeeDto employeeDto)
+        public IActionResult Edit([FromRoute] int id , EmployeeDto employeeDto )
         {
             if (ModelState.IsValid)
             {
+              
                 var existingEmployee = _employeeRepository.GetById(id);
                 if (existingEmployee == null)
                 {
-                    return NotFound();
+                    return NotFound($"gggggggg   id {id}");
                 }
                 existingEmployee.Name = employeeDto.Name;
                 existingEmployee.Age = employeeDto.Age;
@@ -133,23 +124,31 @@ namespace Company.Go5.PLMVC.Controllers
                 _employeeRepository.Update(existingEmployee);
                 return RedirectToAction(nameof(Index));
             }
-            return View(employeeDto);
+            return RedirectToAction(nameof(Index),employeeDto);
         }
 
 
 
-        [HttpGet] public IActionResult DeleteForm()
+        [HttpGet] public IActionResult DeleteForm(int id)
         {
-            return View();
+            var employee = _employeeRepository.GetById(id);
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+
+
+            return View(employee);
         }
 
 
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(Employee employee)
         {
-            var employee = _employeeRepository.GetById(id);
+            
             if (employee != null)
             {
                 _employeeRepository.Delete(employee);
