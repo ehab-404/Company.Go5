@@ -15,33 +15,8 @@
 <form asp-action="Create" >
 
 
-    <div class="my-3">
+    <partial name="DepartmentPartialView/_EditCreatePartail"/>
 
-        <label asp-for="Code" class="col-form-label" ></label>
-        <input asp-for="Code" class="form-control"/>
-        <span asp-validation-for="Code"></span>
-
-    </div>
-
-
-
-    <div class="my-3">
-
-        <label asp-for="Name" class="col-form-label"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name"></span>
-
-    </div>
-
-
-
-    <div class="my-3">
-
-        <label asp-for="CreateAt" class="col-form-label"></label>
-        <input asp-for="CreateAt" class="form-control" />
-        <span asp-validation-for="CreateAt"></span>
-
-    </div>
 
 
 
@@ -51,3 +26,11 @@
         <a asp-action="Index" asp-controller="Department" class="btn btn-light">Back to List</a>
     </div>
 </form>
+
+
+
+@section ValidationSection {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+}
+

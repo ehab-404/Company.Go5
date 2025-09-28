@@ -7,62 +7,9 @@
 
 <form >
 
-    <div class="my-3">
+    <partial name="EmployeePartialView/_DeleteDetailsPartial" />
 
-        <label asp-for="Name" class="col-form-label"></label>
-        <input asp-for="Name" class="form-control" readonly />
-
-
-    </div>
-
-
-
-    <div class="my-3">
-
-        <label asp-for="Age" class="col-form-label"></label>
-        <input asp-for="Age" class="form-control" readonly />
-
-    </div>
-
-
-
-    <div class="my-3">
-
-        <label asp-for="Phone" class="col-form-label"></label>
-        <input asp-for="Phone" class="form-control" readonly />
-
-    </div>
-
-    <div class="my-3">
-
-        <label asp-for="Address" class="col-form-label"></label>
-        <input asp-for="Address" class="form-control" readonly />
-
-    </div>
-
-    <div class="my-3">
-
-        <label asp-for="Email" class="col-form-label"></label>
-        <input asp-for="Email" class="form-control" readonly />
-
-    </div>
-
-    <div class="my-3">
-
-        <label asp-for="Salary" class="col-form-label"></label>
-        <input asp-for="Salary" class="form-control" readonly />
-
-    </div>
-
-    <div class="my-3">
-
-        <label asp-for="HiringDate " class="col-form-label"></label>
-        <input asp-for="HiringDate" class="form-control" readonly />
-
-        </<div>
-
-
-
+    <div>
         <a asp-action="Index" class="btn btn-primary">Back To List</a>
 
         <a asp-action="EditForm" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>

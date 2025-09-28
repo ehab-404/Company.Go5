@@ -36,7 +36,7 @@
                 <th> Phone</th>
                 <th> Address</th>
 				<th> Salary </th>
-				<th> Hiring Date </th>
+                <th> @* @Html.DisplayNameFor(p=>p.HiringDate) *@ Hiring Date </th>
 				<th> Details </th>
 				<th> Update </th>
 				<th> Delete </th>
@@ -55,6 +55,9 @@
                     <td>@item.Address</td>
                     <td>@item.Salary</td>
                     <td>@item.HiringDate</td>
+
+
+
                     <td>
                         <a asp-action="Details"
                            asp-controller="Employee"

@@ -1,6 +1,10 @@
-﻿@model Employee
+﻿@model EmployeeDto
 @{
     ViewData["Title"] = "Edit";
+    var id = ViewData["id"];
+    if(id is null){ id = 0; }
+    else{ id = (int)id; }
+
 }
 
 <h1>Edit</h1>
@@ -11,69 +15,9 @@
 <br />
 
 
-<form asp-action="Edit" method="post" asp-route-id="@Model.Id">
+<form asp-action="Edit" method="post" asp-route-id="@id">
 
-
-
-    <div class="my-3">
-
-        <label asp-for="Name" class="col-form-label"></label>
-        <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name"></span>
-
-    </div>
-
-
-
-    <div class="my-3">
-
-        <label asp-for="Age" class="col-form-label"></label>
-        <input asp-for="Age" class="form-control" />
-        <span asp-validation-for="Age"></span>
-
-    </div>
-
-
-
-    <div class="my-3">
-
-        <label asp-for="Phone" class="col-form-label"></label>
-        <input asp-for="Phone" class="form-control" />
-        <span asp-validation-for="Phone"></span>
-
-    </div>
-
-    <div class="my-3">
-
-        <label asp-for="Address" class="col-form-label"></label>
-        <input asp-for="Address" class="form-control" />
-        <span asp-validation-for="Address"></span>
-
-    </div>
-
-    <div class="my-3">
-
-        <label asp-for="Email" class="col-form-label"></label>
-        <input asp-for="Email" class="form-control" />
-        <span asp-validation-for="Email"></span>
-
-    </div>
-
-    <div class="my-3">
-
-        <label asp-for="Salary" class="col-form-label"></label>
-        <input asp-for="Salary" class="form-control" />
-        <span asp-validation-for="Salary"></span>
-
-    </div>
-
-    <div class="my-3">
-
-        <label asp-for="HiringDate " class="col-form-label"></label>
-        <input asp-for="HiringDate" class="form-control" />
-        <span asp-validation-for="HiringDate"></span>
-
-
+	<partial name="EmployeePartialView/_EditCreatePartail" model="Model" />
 
 
         <div class="my-3">
@@ -82,3 +26,12 @@
         <a asp-action="Index" asp-controller="Employee"  class="btn btn-light">Back to List</a>
     </div>
 </form>
+
+
+
+@section ValidationSection {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+}
+
+

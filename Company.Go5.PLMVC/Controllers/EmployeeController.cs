@@ -98,7 +98,10 @@ namespace Company.Go5.PLMVC.Controllers
                 Salary = employee.Salary,
                 HiringDate = employee.HiringDate
             };
-            return View(employee);
+
+            ViewData["id"] = id;
+
+            return View(employeeDto);
         }
 
 
