@@ -14,6 +14,10 @@ namespace Company.Go5.DAL.Models
 
         public DateTime CreateAt { get; set; }
 
+        public List<Employee>? employees { get; set; }
+
+
+
 
     }
 }

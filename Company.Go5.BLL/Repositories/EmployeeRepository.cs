@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Company.Go5.BLL.Interfaces;
 using Company.Go5.DAL.Data.Contexts;
 using Company.Go5.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Company.Go5.BLL.Repositories
 {
@@ -39,6 +40,12 @@ namespace Company.Go5.BLL.Repositories
         {
             return _dbContext.Employees.ToList();
         }
+        
+        
+        public IEnumerable<Employee> GetAllWithDepartment()
+        {
+            return _dbContext.Employees.Include(p=>p.WorkFor).ToList();
+        }
 
         public Employee? GetById(int id)
         {
@@ -47,6 +54,20 @@ namespace Company.Go5.BLL.Repositories
 
 
         }
+
+        public IEnumerable<Employee> GetAllByName(string name)
+        {
+
+            return _dbContext.Employees.Include(p => p.WorkFor).Where(p => p.Name.ToLower().Contains(name.ToLower()));
+
+            
+        }
+
+        public Employee GetWithDepartment(int id)
+        {
+            return _dbContext.Employees.Include(p => p.WorkFor).FirstOrDefault(p => p.Id==id);
+        }
+        
 
         public int Update(Employee employee)
         {

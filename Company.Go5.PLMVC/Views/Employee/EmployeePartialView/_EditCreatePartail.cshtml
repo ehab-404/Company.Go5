@@ -1,6 +1,13 @@
 ﻿@model EmployeeDto
 
+@{
 
+    var departments = new SelectList(ViewBag.Departments as IEnumerable<Department>
+                , "Id", "Name");
+
+
+
+}
     <div class="my-3">
 
         <label asp-for="Name" class="col-form-label"></label>
@@ -58,6 +65,23 @@
         <label asp-for="HiringDate " class="col-form-label"></label>
         <input asp-for="HiringDate" class="form-control" />
         <span asp-validation-for="HiringDate"></span>
+
+
+
+
+        <div class="my-3">
+            
+            
+            
+            <div class="my-3">
+
+        <label asp-for="WorkForId" class="col-form-label"></label>
+        <select asp-for="WorkForId" asp-items="departments" class="form-control">
+            <option value="@null">
+                --Select Department --
+            </option>
+
+        </select>
 
 
 

@@ -2,21 +2,29 @@
 using Company.Go5.DAL.Models;
 using Company.Go5.PLMVC.Dtos;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Company.Go5.PLMVC.Controllers
 {
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
-        public EmployeeController( IEmployeeRepository employeeRepository)
+        private readonly IDepartmentRepository _departmentRepository;
+        public EmployeeController( IEmployeeRepository employeeRepository, IDepartmentRepository departmentRepository   )
         {
             _employeeRepository = employeeRepository;
-
+            _departmentRepository = departmentRepository;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string? SearchInput)
         {
-            var employees = _employeeRepository.GetAll();
+            var employees = _employeeRepository.GetAllWithDepartment();
+
+            if (!SearchInput.IsNullOrEmpty())
+            {
+
+                employees = _employeeRepository.GetAllByName(SearchInput);
+            }
 
             return View(employees);
         }
@@ -36,7 +44,7 @@ namespace Company.Go5.PLMVC.Controllers
 
 
 
-            var employee = _employeeRepository.GetById(id);
+            var employee = _employeeRepository.GetWithDepartment(id);
 
 
 
@@ -48,6 +56,11 @@ namespace Company.Go5.PLMVC.Controllers
 
         public IActionResult CreateForm()
         {
+
+
+            ViewBag.Departments = _departmentRepository.GetAll();
+
+            
 
             return View();
         }
@@ -69,7 +82,8 @@ namespace Company.Go5.PLMVC.Controllers
                     HiringDate = employeeDto.HiringDate,
                     CreateAt = DateTime.Now,
                     IsActive = true,
-                    IsDeleted = false
+                    IsDeleted = false,
+                    WorkForId = employeeDto.WorkForId
                 };
                 _employeeRepository.Add(employee);
             }
@@ -89,17 +103,20 @@ namespace Company.Go5.PLMVC.Controllers
             }
             var employeeDto = new EmployeeDto
             {
-               
+
                 Name = employee.Name,
                 Age = employee.Age,
                 Email = employee.Email,
                 Phone = employee.Phone,
                 Address = employee.Address,
                 Salary = employee.Salary,
-                HiringDate = employee.HiringDate
+                HiringDate = employee.HiringDate,
+                WorkFor = employee.WorkFor,
+                WorkForId = employee.WorkForId
             };
 
             ViewData["id"] = id;
+            ViewBag.Departments = _departmentRepository.GetAll();
 
             return View(employeeDto);
         }
@@ -124,6 +141,9 @@ namespace Company.Go5.PLMVC.Controllers
                 existingEmployee.Address = employeeDto.Address;
                 existingEmployee.Salary = employeeDto.Salary;
                 existingEmployee.HiringDate = employeeDto.HiringDate;
+                existingEmployee.WorkFor= employeeDto.WorkFor;
+                existingEmployee.WorkForId= employeeDto.WorkForId;
+
                 _employeeRepository.Update(existingEmployee);
                 return RedirectToAction(nameof(Index));
             }
@@ -132,9 +152,10 @@ namespace Company.Go5.PLMVC.Controllers
 
 
 
-        [HttpGet] public IActionResult DeleteForm(int id)
+        [HttpGet] 
+        public IActionResult DeleteForm(int id)
         {
-            var employee = _employeeRepository.GetById(id);
+            var employee = _employeeRepository.GetWithDepartment(id);
             if (employee == null)
             {
                 return NotFound();
@@ -154,6 +175,11 @@ namespace Company.Go5.PLMVC.Controllers
             
             if (employee != null)
             {
+                employee.WorkFor = null;
+                employee.WorkForId = null;
+
+
+
                 _employeeRepository.Delete(employee);
             }
             return RedirectToAction(nameof(Index));

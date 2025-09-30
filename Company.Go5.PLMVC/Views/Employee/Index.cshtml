@@ -7,6 +7,22 @@
 }
 <h1>All Employees  </h1>
 
+<br/>
+<br/>
+
+
+<form>
+    <div>
+
+        <input id="SearchInput" name="SearchInput" placeholder="search by name " class="form-control" />
+        
+        <br />
+        <br />
+
+<input type="submit" value="Search" class="btn btn-success" />
+    </div>
+
+</form>
 
 
 <br/>
@@ -29,17 +45,20 @@
         <thead>
             <tr>
 
-                
+
                 <th> Name</th>
                 <th>Age  </th>
                 <th> Email</th>
                 <th> Phone</th>
                 <th> Address</th>
-				<th> Salary </th>
+                <th> Salary </th>
                 <th> @* @Html.DisplayNameFor(p=>p.HiringDate) *@ Hiring Date </th>
-				<th> Details </th>
-				<th> Update </th>
-				<th> Delete </th>
+
+                <th> Department  </th>
+
+                <th> Details </th>
+                <th> Update </th>
+                <th> Delete </th>
             </tr>
         </thead>
 
@@ -47,7 +66,7 @@
             @foreach(var item in Model)
             {
                 <tr>
-                    
+
                     <td>@item.Name</td>
                     <td>@item.Age</td>
                     <td>@item.Email</td>
@@ -55,6 +74,20 @@
                     <td>@item.Address</td>
                     <td>@item.Salary</td>
                     <td>@item.HiringDate</td>
+
+
+                    @{
+                        if(item.WorkFor is  null)
+                        {
+                            <td>No department </td>
+                        }
+                        else
+                        {
+                           
+                            <td>@item.WorkFor?.Name</td>
+                        }
+                    }
+
 
 
 

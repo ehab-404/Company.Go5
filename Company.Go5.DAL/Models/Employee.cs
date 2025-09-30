@@ -30,12 +30,13 @@ namespace Company.Go5.DAL.Models
 
         public bool IsDeleted { get; set; }
 
-        
-
-       
 
         public DateTime CreateAt { get; set; }
 
+
+        public int? WorkForId { get; set; }
+
+        public Department? WorkFor { get; set; }
 
 
 
