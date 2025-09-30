@@ -23,6 +23,23 @@ namespace Company.Go5.PLMVC.Controllers
         [HttpGet]  //get : / Department/Index 
         public IActionResult Index()
         {
+
+            //view storage : 
+            //built in Dictionary<string,object or dynamic >
+            //accessed by 3 properties inherited from Controller  :
+            //1.ViewData: transfer extra information from controller(action) to view 
+            //value type is object and access using ["key"]  :ViewData["Title"] = "Index";
+
+            //2.ViewBag : transfer extra information from controller(action) to view 
+            //value type is dynamic and access using .  : var x = ViewBag.Message;
+
+
+
+            //3.TempData : transfer information from action to action in same request 
+
+            ViewData["Message"] = "dictionary view data";
+
+
             var departments = _departmentRepository.GetAll();
 
             return View(departments);
@@ -39,7 +56,8 @@ namespace Company.Go5.PLMVC.Controllers
         [HttpPost]
         public IActionResult Create(DepartmentDto department)
         {
-            if(ModelState.IsValid) //server side validation 
+            var count = 0;
+            if (ModelState.IsValid) //server side validation 
             {
                 //manual mapping 
                 var NewDepartment = new Department
@@ -48,9 +66,11 @@ namespace Company.Go5.PLMVC.Controllers
                     Name = department.Name,
                     CreateAt = department.CreateAt
                 };
-                _departmentRepository.Add(NewDepartment);
+               count =  _departmentRepository.Add(NewDepartment);
 
             }
+
+            TempData["CreateStatu"]= count;
 
             return RedirectToAction(nameof(Index) );
 

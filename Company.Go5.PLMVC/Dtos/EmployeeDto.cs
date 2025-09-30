@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using Company.Go5.DAL.Models;
 
 namespace Company.Go5.PLMVC.Dtos
 {
@@ -24,6 +25,18 @@ namespace Company.Go5.PLMVC.Dtos
         [DisplayName("Hiring Date")]
         public DateTime HiringDate { get; set; }
 
+        
+        public bool IsActive { get; set; }
+
+        public bool IsDeleted { get; set; }
+
+
+        public DateTime CreateAt { get; set; }
+
+        [DisplayName("department")]
+        public int? WorkForId { get; set; }
+
+        public Department? WorkFor { get; set; }
 
     }
 }

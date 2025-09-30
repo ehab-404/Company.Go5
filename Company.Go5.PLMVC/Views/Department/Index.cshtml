@@ -4,6 +4,8 @@
 
 @{
     ViewData["Title"] = "Index";
+    var x = ViewBag.Message;
+
 }
 <h1>All Departments </h1>
 
@@ -11,6 +13,17 @@
 
 <br/>
 <br/>
+
+@if (@TempData["CreateStatu"] is not null )
+    {
+    <div class="m-3 alert alert-info">
+
+    <p> @TempData["CreateStatu"] department created  </p>
+
+</div>
+
+    }
+
 
 <a  asp-action="Create" asp-controller="Department"  class="btn btn-primary"> Create Department </a>
 
