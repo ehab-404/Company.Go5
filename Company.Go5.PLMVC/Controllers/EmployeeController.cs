@@ -20,7 +20,7 @@ namespace Company.Go5.PLMVC.Controllers
         {
             var employees = _employeeRepository.GetAllWithDepartment();
 
-            if (!SearchInput.IsNullOrEmpty())
+            if (!string.IsNullOrEmpty(SearchInput))
             {
 
                 employees = _employeeRepository.GetAllByName(SearchInput);
