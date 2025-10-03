@@ -16,17 +16,17 @@ namespace Company.Go5.BLL.Repositories
         {
             _dbContext= dbContext;
         }
-        public int Add(T model)
+        public void Add(T model)
         {
             _dbContext.Add(model);
-            return _dbContext.SaveChanges();
+           
 
         }
 
-        public int Delete(T model)
+        public void Delete(T model)
         {
             _dbContext.Remove(model);
-            return _dbContext.SaveChanges();
+           
         }
 
         public IEnumerable<T> GetAll()
@@ -40,10 +40,10 @@ namespace Company.Go5.BLL.Repositories
             return _dbContext.Set<T>().Find(id);
         }
 
-        public int Update(T model)
+        public void Update(T model)
         {
             _dbContext.Update(model);
-            return _dbContext.SaveChanges();
+           
         }
     }
 }

@@ -20,4 +20,9 @@
     <ProjectReference Include="..\Company.Go5.DAL\Company.Go5.DAL.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\files\images\" />
+    <Folder Include="wwwroot\files\videos\" />
+  </ItemGroup>
+
 </Project>

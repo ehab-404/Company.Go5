@@ -33,24 +33,24 @@ namespace Company.Go5.BLL.Repositories
 
         }
 
-        public int Add(Department department)
-        {
-            context.Departments.Add(department);
-            return context.SaveChanges();
-        }
+        //public int Add(Department department)
+        //{
+        //    context.Departments.Add(department);
+        //    return context.SaveChanges();
+        //}
 
-        public int Delete(Department department)
-        {
-            context.Departments.Remove(department);
-            return context.SaveChanges();
-        }
+        //public int Delete(Department department)
+        //{
+        //    context.Departments.Remove(department);
+        //    return context.SaveChanges();
+        //}
 
 
 
-        public int Update(Department department)
-        {
-           context.Departments.Update(department);
-            return context.SaveChanges();
-        }
+        //public int Update(Department department)
+        //{
+        //   context.Departments.Update(department);
+        //    return context.SaveChanges();
+        //}
     }
 }

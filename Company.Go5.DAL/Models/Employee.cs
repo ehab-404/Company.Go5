@@ -38,6 +38,8 @@ namespace Company.Go5.DAL.Models
 
         public Department? WorkFor { get; set; }
 
+        public string? ImageName { get; set; }
+
 
 
 

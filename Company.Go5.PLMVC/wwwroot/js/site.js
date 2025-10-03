@@ -5,4 +5,29 @@
 
 
 let SearchInput = document.getElementById("SearchInput");
-/*SearchInput.addEventListener("keyup" )*/
+SearchInput.addEventListener("keyup", () => {
+
+    let xhr =  new XMLHttpRequest();
+
+    let url = `https://localhost:44354/Employee?SearchInput=${SearchInput.value}`;
+
+
+    xhr.open("Get", url, true);
+
+    xhr.onreadystatechange = function () {
+
+        if (this.readyState == 4 && this.status == 200) {
+
+            console.log(this.responseText);
+
+        }
+    }
+
+
+    xhr.send();
+
+
+
+
+
+})

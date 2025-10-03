@@ -1,3 +1,4 @@
+using Company.Go5.BLL;
 using Company.Go5.BLL.Interfaces;
 using Company.Go5.BLL.Repositories;
 using Company.Go5.DAL.Models;
@@ -10,14 +11,16 @@ namespace Company.Go5.PLMVC.Controllers
     public class DepartmentController : Controller
     {
         private readonly IDepartmentRepository _departmentRepository;
+        private readonly IUnitOfWork unitOfWork;
 
         //ask clr to create object of DepartmentRepository
         //when assigning it reference of type of IDepartmentRepository
         //by making dependency injection in services region 
-        public DepartmentController(IDepartmentRepository departmentRepository) 
+        public DepartmentController(IDepartmentRepository departmentRepository,IUnitOfWork unitOfWork) 
         { 
         
             _departmentRepository = departmentRepository;
+            this.unitOfWork = unitOfWork;
         }
 
         [HttpGet]  //get : / Department/Index 
@@ -40,8 +43,9 @@ namespace Company.Go5.PLMVC.Controllers
             ViewData["Message"] = "dictionary view data";
 
 
-            var departments = _departmentRepository.GetAll();
-
+           // var departments = _departmentRepository.GetAll();
+            var departments = unitOfWork.departmentRepository.GetAll();
+            
             return View(departments);
         }
 
@@ -66,8 +70,9 @@ namespace Company.Go5.PLMVC.Controllers
                     Name = department.Name,
                     CreateAt = department.CreateAt
                 };
-               count =  _departmentRepository.Add(NewDepartment);
-
+                //_departmentRepository.Add(NewDepartment);
+                unitOfWork.departmentRepository.Add(NewDepartment);
+                 count = unitOfWork.Complete();
             }
 
             TempData["CreateStatu"]= count;
@@ -85,7 +90,7 @@ namespace Company.Go5.PLMVC.Controllers
 
             if(id is null) { return BadRequest("id required "); }
 
-            var department = _departmentRepository.GetById(id.Value);
+            var department = unitOfWork.departmentRepository.GetById(id.Value);
             if(department is null) { return NotFound($"no department with this id {id}") ; }
 
 
@@ -115,7 +120,7 @@ namespace Company.Go5.PLMVC.Controllers
 
             if (id is null) { return BadRequest("id required "); }
 
-            var department = _departmentRepository.GetById(id.Value);
+            var department = unitOfWork.departmentRepository.GetById(id.Value);
             if (department is null) { return NotFound($"no department with this id {id}"); }
 
 
@@ -148,7 +153,7 @@ namespace Company.Go5.PLMVC.Controllers
             }
            
 
-            var department = _departmentRepository.GetById(id);
+            var department = unitOfWork.departmentRepository.GetById(id);
 
             if (department == null)
             {
@@ -156,8 +161,8 @@ namespace Company.Go5.PLMVC.Controllers
             }
 
 
-            var count = _departmentRepository.Delete(department);
-
+            unitOfWork.departmentRepository.Delete(department);
+            var count = unitOfWork.Complete();
             if (count > 0)
             {
                 return RedirectToAction(nameof(Index));
@@ -179,7 +184,7 @@ namespace Company.Go5.PLMVC.Controllers
         {
             if (id is null) { return BadRequest("id is required"); }
 
-            var department = _departmentRepository.GetById(id.Value);
+            var department = unitOfWork.departmentRepository.GetById(id.Value);
 
             if (department is null) { return NotFound($"no department with id {id}"); }
 
@@ -214,7 +219,7 @@ namespace Company.Go5.PLMVC.Controllers
             }
 
 
-            var department = _departmentRepository.GetById(id);
+            var department = unitOfWork.departmentRepository.GetById(id);
 
             if (department == null)
             {
@@ -227,8 +232,8 @@ namespace Company.Go5.PLMVC.Controllers
 
 
 
-            var count = _departmentRepository.Update(department);
-
+             unitOfWork.departmentRepository.Update(department);
+            var count = unitOfWork.Complete();
                 if (count > 0)
                 {
                     return RedirectToAction(nameof(Index));
