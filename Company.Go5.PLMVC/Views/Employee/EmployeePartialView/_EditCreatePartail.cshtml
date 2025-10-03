@@ -1,8 +1,21 @@
 ﻿@model EmployeeDto
 
+//you can use di in view  :   to ask clr to inject object in view 
+
+@inject IDepartmentRepository departmentRepository;
+
+
+
+
 @{
 
-    var departments = new SelectList(ViewBag.Departments as IEnumerable<Department>
+    // var departments = new SelectList(ViewBag.Departments as IEnumerable<Department>
+    //             , "Id", "Name");
+  
+    
+    var alldepartments = departmentRepository.GetAll();
+
+    var departments = new SelectList(alldepartments 
                 , "Id", "Name");
 
 
@@ -88,4 +101,13 @@
 
         <div class="my-3">
 
+
+
+    <div class="my-3">
+
+        <label asp-for="Image" class="col-form-label"></label>
+        <input asp-for="Image" class="form-control" />
+        <span asp-validation-for="Image"></span>
+
+    </div>
 

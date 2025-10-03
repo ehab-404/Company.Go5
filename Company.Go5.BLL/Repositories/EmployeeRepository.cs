@@ -19,22 +19,24 @@ namespace Company.Go5.BLL.Repositories
             _dbContext=dbContext;
         }
 
-        public int Add(Employee employee)
-        {
-            _dbContext.Add(employee);
+        //public int Add(Employee employee)
+        //{
+        //    _dbContext.Add(employee);
            
 
-            return _dbContext.SaveChanges();
+        //    return _dbContext.SaveChanges();
 
 
 
-        }
+        //}
 
-        public int Delete(Employee employee)
-        {
-            _dbContext.Remove(employee);
-            return _dbContext.SaveChanges();
-        }
+        //public int Delete(Employee employee)
+        //{
+        //    employee.WorkFor = null;
+        //    employee.WorkForId = null;
+        //    _dbContext.Remove(employee);
+        //    return _dbContext.SaveChanges();
+        //}
 
         public IEnumerable<Employee> GetAll()
         {
@@ -69,10 +71,10 @@ namespace Company.Go5.BLL.Repositories
         }
         
 
-        public int Update(Employee employee)
-        {
-            _dbContext.Update(employee);
-            return _dbContext.SaveChanges();
-        }
+        //public int Update(Employee employee)
+        //{
+        //    _dbContext.Update(employee);
+        //    return _dbContext.SaveChanges();
+        //}
     }
 }

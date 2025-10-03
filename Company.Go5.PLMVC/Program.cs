@@ -1,7 +1,10 @@
+using Company.Go5.BLL;
 using Company.Go5.BLL.Interfaces;
 using Company.Go5.BLL.Repositories;
 using Company.Go5.DAL.Data.Contexts;
+using Company.Go5.PLMVC.Mapping;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Company.Go5.PLMVC
 {
@@ -19,9 +22,37 @@ namespace Company.Go5.PLMVC
 
             builder.Services.AddScoped<IDepartmentRepository,DepartmentRepository>();
 
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
             builder.Services.AddScoped<IEmployeeRepository,EmployeeRepository>();
 
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+            //builder.Services.AddScoped<EmployeeProfile>();
+            builder.Services.AddAutoMapper(m=>m.AddProfile(new EmployeeProfile() )  );
+
+           
+
+
+            //dependency injection lifetime 
+
+            //object per each operation or action or method   life time =operation 
+            //builder.Services.AddTransient<IEmployeeRepository, EmployeeRepository>();
+
+
+            ////object per each request  life time=request time 
+
+            //builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+
+
+
+            ////object per each running application  life time=application time
+
+            //builder.Services.AddSingleton<IEmployeeRepository, EmployeeRepository>();
+
+
+
+
 
 
 

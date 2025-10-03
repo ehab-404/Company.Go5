@@ -38,5 +38,13 @@ namespace Company.Go5.PLMVC.Dtos
 
         public Department? WorkFor { get; set; }
 
+        public IFormFile? Image { get; set; }
+
+        public string? ImageName { get; set; }
+
+
+
+
+
     }
 }
