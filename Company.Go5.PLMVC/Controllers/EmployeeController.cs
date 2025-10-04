@@ -171,6 +171,26 @@ namespace Company.Go5.PLMVC.Controllers
             if (ModelState.IsValid)
             {
               
+                if(employeeDto.ImageName is not null&& employeeDto.Image is not null)
+                {
+
+                    AttachmentSettings.Unload(employeeDto.ImageName, "images");
+
+                   
+
+
+
+
+                }
+
+
+                if(employeeDto.Image is not null)
+                {
+                    employeeDto.ImageName = AttachmentSettings.Upload(employeeDto.Image, "images");
+                }
+
+
+
                 //var existingEmployee = _employeeRepository.GetById(id);
                 var existingEmployee = unitOfWork.employeeRepository.GetById(id);
                 if (existingEmployee == null)
@@ -238,6 +258,16 @@ namespace Company.Go5.PLMVC.Controllers
                 //  _employeeRepository.Delete(employee);
                 unitOfWork.employeeRepository.Delete(employee);
                 var count = unitOfWork.Complete();
+
+                if (count > 0)
+                {
+                    AttachmentSettings.Unload(employee.ImageName, "images");
+
+                }
+
+
+                
+
             }
             return RedirectToAction(nameof(Index));
         }
