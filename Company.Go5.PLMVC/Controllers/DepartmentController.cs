@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using Company.Go5.BLL;
 using Company.Go5.BLL.Interfaces;
 using Company.Go5.BLL.Repositories;
@@ -24,7 +25,7 @@ namespace Company.Go5.PLMVC.Controllers
         }
 
         [HttpGet]  //get : / Department/Index 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
 
             //view storage : 
@@ -44,7 +45,7 @@ namespace Company.Go5.PLMVC.Controllers
 
 
            // var departments = _departmentRepository.GetAll();
-            var departments = unitOfWork.departmentRepository.GetAll();
+            var departments =await unitOfWork.departmentRepository.GetAllAsync();
             
             return View(departments);
         }
@@ -58,7 +59,7 @@ namespace Company.Go5.PLMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult Create(DepartmentDto department)
+        public async Task<IActionResult> Create(DepartmentDto department)
         {
             var count = 0;
             if (ModelState.IsValid) //server side validation 
@@ -72,7 +73,7 @@ namespace Company.Go5.PLMVC.Controllers
                 };
                 //_departmentRepository.Add(NewDepartment);
                 unitOfWork.departmentRepository.Add(NewDepartment);
-                 count = unitOfWork.Complete();
+                 count = await unitOfWork.CompleteAsync();
             }
 
             TempData["CreateStatu"]= count;
@@ -85,12 +86,12 @@ namespace Company.Go5.PLMVC.Controllers
 
         [HttpGet]
 
-        public IActionResult Details(int?id)
+        public async Task<IActionResult> Details(int?id)
         {
 
             if(id is null) { return BadRequest("id required "); }
 
-            var department = unitOfWork.departmentRepository.GetById(id.Value);
+            var department = await unitOfWork.departmentRepository.GetByIdAsync(id.Value);
             if(department is null) { return NotFound($"no department with this id {id}") ; }
 
 
@@ -115,12 +116,12 @@ namespace Company.Go5.PLMVC.Controllers
 
         [HttpGet]
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
 
             if (id is null) { return BadRequest("id required "); }
 
-            var department = unitOfWork.departmentRepository.GetById(id.Value);
+            var department =await unitOfWork.departmentRepository.GetByIdAsync(id.Value);
             if (department is null) { return NotFound($"no department with this id {id}"); }
 
 
@@ -142,7 +143,7 @@ namespace Company.Go5.PLMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete( [FromRoute] int id , DepartmentDto DepartmentDto)
+        public async Task<IActionResult> Delete( [FromRoute] int id , DepartmentDto DepartmentDto)
         {
            
 
@@ -153,7 +154,7 @@ namespace Company.Go5.PLMVC.Controllers
             }
            
 
-            var department = unitOfWork.departmentRepository.GetById(id);
+            var department = await unitOfWork.departmentRepository.GetByIdAsync(id);
 
             if (department == null)
             {
@@ -162,7 +163,7 @@ namespace Company.Go5.PLMVC.Controllers
 
 
             unitOfWork.departmentRepository.Delete(department);
-            var count = unitOfWork.Complete();
+            var count = await unitOfWork.CompleteAsync();
             if (count > 0)
             {
                 return RedirectToAction(nameof(Index));
@@ -180,11 +181,11 @@ namespace Company.Go5.PLMVC.Controllers
 
         [HttpGet]
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id is null) { return BadRequest("id is required"); }
 
-            var department = unitOfWork.departmentRepository.GetById(id.Value);
+            var department = await unitOfWork.departmentRepository.GetByIdAsync(id.Value);
 
             if (department is null) { return NotFound($"no department with id {id}"); }
 
@@ -208,7 +209,7 @@ namespace Company.Go5.PLMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit( DepartmentDto DepartmentDto ,[FromRoute] int id)
+        public async Task<IActionResult> Edit( DepartmentDto DepartmentDto ,[FromRoute] int id)
         {
 
 
@@ -219,7 +220,7 @@ namespace Company.Go5.PLMVC.Controllers
             }
 
 
-            var department = unitOfWork.departmentRepository.GetById(id);
+            var department = await unitOfWork.departmentRepository.GetByIdAsync(id);
 
             if (department == null)
             {
@@ -233,7 +234,7 @@ namespace Company.Go5.PLMVC.Controllers
 
 
              unitOfWork.departmentRepository.Update(department);
-            var count = unitOfWork.Complete();
+            var count = await unitOfWork.CompleteAsync();
                 if (count > 0)
                 {
                     return RedirectToAction(nameof(Index));

@@ -38,36 +38,33 @@ namespace Company.Go5.BLL.Repositories
         //    return _dbContext.SaveChanges();
         //}
 
-        public IEnumerable<Employee> GetAll()
+        public async Task< IEnumerable<Employee> > GetAllAsync()
         {
-            return _dbContext.Employees.ToList();
+            return await _dbContext.Employees.ToListAsync();
         }
         
         
-        public IEnumerable<Employee> GetAllWithDepartment()
+        public  async Task<IEnumerable<Employee>> GetAllWithDepartmentAsync()
         {
-            return _dbContext.Employees.Include(p=>p.WorkFor).ToList();
+            return await _dbContext.Employees.Include(p=>p.WorkFor).ToListAsync();
         }
 
-        public Employee? GetById(int id)
+        public async Task< Employee? > GetByIdAsync(int id)
         {
-            return _dbContext.Employees.Find(id);
+            return await _dbContext.Employees.FindAsync(id);
 
 
 
         }
 
-        public IEnumerable<Employee> GetAllByName(string name)
+        public async Task<IEnumerable<Employee>> GetAllByNameAsync(string name)
         {
-
-            return _dbContext.Employees.Include(p => p.WorkFor).Where(p => p.Name.ToLower().Contains(name.ToLower()));
-
-            
+            return await _dbContext.Employees.Include(p=>p.WorkFor).Where(p => p.Name.ToLower().Contains(name.ToLower())).ToListAsync();
         }
 
-        public Employee GetWithDepartment(int id)
+        public async Task< Employee> GetWithDepartmentAsync(int id)
         {
-            return _dbContext.Employees.Include(p => p.WorkFor).FirstOrDefault(p => p.Id==id);
+            return await _dbContext.Employees.Include(p => p.WorkFor).FirstOrDefaultAsync(p => p.Id==id);
         }
         
 

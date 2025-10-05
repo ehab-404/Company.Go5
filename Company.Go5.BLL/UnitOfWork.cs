@@ -9,7 +9,7 @@ using Company.Go5.DAL.Data.Contexts;
 
 namespace Company.Go5.BLL
 {
-    public class UnitOfWork : IUnitOfWork,IDisposable
+    public class UnitOfWork : IUnitOfWork,IAsyncDisposable
     {
         private readonly CompanyDbContext dbContext;
 
@@ -31,17 +31,19 @@ namespace Company.Go5.BLL
 
 
 
-        public int Complete()
+        public async Task<int> CompleteAsync()
         {
 
-            return dbContext.SaveChanges();
+            return await dbContext.SaveChangesAsync();
         }
 
-        public void Dispose()
+        
+
+        public async ValueTask DisposeAsync()
         {
-            dbContext.Dispose();
-        }
+            await dbContext.DisposeAsync();
 
+        }
     }
 
 }

@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Company.Go5.BLL.Interfaces;
 using Company.Go5.DAL.Data.Contexts;
 using Company.Go5.DAL.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Company.Go5.BLL.Repositories
 {
@@ -16,9 +18,9 @@ namespace Company.Go5.BLL.Repositories
         {
             _dbContext= dbContext;
         }
-        public void Add(T model)
+        public async Task Add(T model)
         {
-            _dbContext.Add(model);
+            _dbContext.AddAsync(model);
            
 
         }
@@ -29,15 +31,15 @@ namespace Company.Go5.BLL.Repositories
            
         }
 
-        public IEnumerable<T> GetAll()
+        public async Task<IEnumerable<T> > GetAllAsync()
         {
-            return _dbContext.Set<T>().ToList();
+            return await _dbContext.Set<T>().ToListAsync();
 
         }
 
-        public T? GetById(int id)
+        public async Task<T?> GetByIdAsync(int id)
         {
-            return _dbContext.Set<T>().Find(id);
+            return await _dbContext.Set<T>().FindAsync(id);
         }
 
         public void Update(T model)
