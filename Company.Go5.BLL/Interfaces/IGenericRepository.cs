@@ -10,11 +10,11 @@ namespace Company.Go5.BLL.Interfaces
     public interface IGenericRepository<T> where T : Entity
     {
 
-        IEnumerable<T> GetAll();
+        Task<IEnumerable<T>> GetAllAsync();
 
-        T? GetById(int id);
+        Task<T>? GetByIdAsync(int id);
 
-        void Add(T model);
+        Task Add(T model);
 
         void Update(T model);
 

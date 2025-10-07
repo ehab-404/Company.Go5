@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Company.Go5.BLL.Interfaces;
 using Company.Go5.PLMVC.Helpers;
+using System.Threading.Tasks;
 
 namespace Company.Go5.PLMVC.Controllers
 {
@@ -27,23 +28,23 @@ namespace Company.Go5.PLMVC.Controllers
             this.unitOfWork = unitOfWork;
         }
 
-        public IActionResult Index(string? SearchInput)
+        public async Task<IActionResult> Index(string? SearchInput)
         {
            // var employees = _employeeRepository.GetAllWithDepartment();
-            var employees = unitOfWork.employeeRepository.GetAllWithDepartment();
+            var employees = await unitOfWork.employeeRepository.GetAllWithDepartmentAsync();
 
             if (!string.IsNullOrEmpty(SearchInput))
             {
 
                // employees = _employeeRepository.GetAllByName(SearchInput);
-                employees = unitOfWork.employeeRepository.GetAllByName(SearchInput);
+                employees = await unitOfWork.employeeRepository.GetAllByNameAsync(SearchInput);
             }
 
             return View(employees);
         }
 
         [HttpGet]
-        public IActionResult Details(int id) {
+        public async Task<IActionResult> Details(int id) {
 
             if(ModelState.IsValid == false)
             {
@@ -58,7 +59,7 @@ namespace Company.Go5.PLMVC.Controllers
 
 
            // var employee = _employeeRepository.GetWithDepartment(id);
-            var employee = unitOfWork.employeeRepository.GetWithDepartment(id);
+            var employee = await unitOfWork.employeeRepository.GetWithDepartmentAsync(id);
 
 
 
@@ -68,12 +69,12 @@ namespace Company.Go5.PLMVC.Controllers
 
         [HttpGet]
 
-        public IActionResult CreateForm()
+        public async Task<IActionResult> CreateForm()
         {
 
 
            // ViewBag.Departments = _departmentRepository.GetAll();
-            ViewBag.Departments = unitOfWork.departmentRepository.GetAll();
+            ViewBag.Departments =await unitOfWork.departmentRepository.GetAllAsync();
 
             
 
@@ -82,7 +83,7 @@ namespace Company.Go5.PLMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(EmployeeDto employeeDto)
+        public async Task<IActionResult> Create(EmployeeDto employeeDto)
         {
             if (ModelState.IsValid)
             {
@@ -119,7 +120,7 @@ namespace Company.Go5.PLMVC.Controllers
                 //_employeeRepository.Add(employee);
                 unitOfWork.employeeRepository.Add(employee);
 
-                var count = unitOfWork.Complete();
+                var count = await unitOfWork.CompleteAsync();
             }
 
             else { return BadRequest(ModelState); }
@@ -128,10 +129,10 @@ namespace Company.Go5.PLMVC.Controllers
 
 
         [HttpGet]
-        public IActionResult EditForm(int id)
+        public async Task<IActionResult> EditForm(int id)
         {
             //var employee = _employeeRepository.GetById(id);
-            var employee = unitOfWork.employeeRepository.GetById(id);
+            var employee = await unitOfWork.employeeRepository.GetByIdAsync(id);
             if (employee == null)
             {
                 return NotFound();
@@ -158,7 +159,7 @@ namespace Company.Go5.PLMVC.Controllers
 
             ViewData["id"] = id;
            // ViewBag.Departments = _departmentRepository.GetAll();
-            ViewBag.Departments = unitOfWork.departmentRepository.GetAll();
+            ViewBag.Departments =await unitOfWork.departmentRepository.GetAllAsync();
 
             return View(employeeDto);
         }
@@ -166,7 +167,7 @@ namespace Company.Go5.PLMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit([FromRoute] int id , EmployeeDto employeeDto )
+        public async Task<IActionResult> Edit([FromRoute] int id , EmployeeDto employeeDto )
         {
             if (ModelState.IsValid)
             {
@@ -192,7 +193,7 @@ namespace Company.Go5.PLMVC.Controllers
 
 
                 //var existingEmployee = _employeeRepository.GetById(id);
-                var existingEmployee = unitOfWork.employeeRepository.GetById(id);
+                var existingEmployee = await unitOfWork.employeeRepository.GetByIdAsync(id);
                 if (existingEmployee == null)
                 {
                     return NotFound($"gggggggg   id {id}");
@@ -218,7 +219,7 @@ namespace Company.Go5.PLMVC.Controllers
 
               //  _employeeRepository.Update(existingEmployee);
                 unitOfWork.employeeRepository.Update(existingEmployee);
-                var count = unitOfWork.Complete();
+                var count = await unitOfWork.CompleteAsync();
                 return RedirectToAction(nameof(Index));
             }
             return RedirectToAction(nameof(Index),employeeDto);
@@ -227,10 +228,10 @@ namespace Company.Go5.PLMVC.Controllers
 
 
         [HttpGet] 
-        public IActionResult DeleteForm(int id)
+        public async Task<IActionResult> DeleteForm(int id)
         {
             //var employee = _employeeRepository.GetWithDepartment(id);
-            var employee = unitOfWork.employeeRepository.GetWithDepartment(id);
+            var employee = await unitOfWork.employeeRepository.GetWithDepartmentAsync(id);
             if (employee == null)
             {
                 return NotFound();
@@ -245,7 +246,7 @@ namespace Company.Go5.PLMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(Employee employee)
+        public async Task<IActionResult> Delete(Employee employee)
         {
             
             if (employee != null)
@@ -257,7 +258,7 @@ namespace Company.Go5.PLMVC.Controllers
 
                 //  _employeeRepository.Delete(employee);
                 unitOfWork.employeeRepository.Delete(employee);
-                var count = unitOfWork.Complete();
+                var count = await unitOfWork.CompleteAsync();
 
                 if (count > 0)
                 {

@@ -19,12 +19,12 @@ namespace Company.Go5.BLL.Interfaces
 
         //int Delete (Employee employee);
 
-        public IEnumerable<Employee> GetAllWithDepartment();
+        public Task<IEnumerable<Employee>> GetAllWithDepartmentAsync();
 
-        public Employee GetWithDepartment(int id );
+        public Task<Employee> GetWithDepartmentAsync(int id );
 
 
-        public IEnumerable<Employee> GetAllByName(string name);
+        public Task<IEnumerable<Employee>> GetAllByNameAsync(string name);
 
 
 

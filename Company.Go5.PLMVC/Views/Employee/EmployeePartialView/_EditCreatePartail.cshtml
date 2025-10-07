@@ -13,7 +13,7 @@
     //             , "Id", "Name");
   
     
-    var alldepartments = departmentRepository.GetAll();
+    var alldepartments = await departmentRepository.GetAllAsync();
 
     var departments = new SelectList(alldepartments 
                 , "Id", "Name");

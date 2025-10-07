@@ -12,6 +12,8 @@ namespace Company.Go5.BLL.Interfaces
 
         public IDepartmentRepository departmentRepository { get; }
 
-        public int Complete();
+        public  Task<int> CompleteAsync();
+
+
     }
 }
