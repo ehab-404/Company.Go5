@@ -8,9 +8,12 @@ using Microsoft.IdentityModel.Tokens;
 using Company.Go5.BLL.Interfaces;
 using Company.Go5.PLMVC.Helpers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Company.Go5.PLMVC.Controllers
 {
+
+    [Authorize]
     public class EmployeeController : Controller
     {
         private readonly IEmployeeRepository _employeeRepository;
