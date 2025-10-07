@@ -2,7 +2,9 @@ using Company.Go5.BLL;
 using Company.Go5.BLL.Interfaces;
 using Company.Go5.BLL.Repositories;
 using Company.Go5.DAL.Data.Contexts;
+using Company.Go5.DAL.Models;
 using Company.Go5.PLMVC.Mapping;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -31,7 +33,9 @@ namespace Company.Go5.PLMVC
             //builder.Services.AddScoped<EmployeeProfile>();
             builder.Services.AddAutoMapper(m=>m.AddProfile(new EmployeeProfile() )  );
 
-           
+            builder.Services.AddIdentity<AppUser, IdentityRole>()
+                .AddEntityFrameworkStores<CompanyDbContext>();
+
 
 
             //dependency injection lifetime 
@@ -65,6 +69,11 @@ namespace Company.Go5.PLMVC
             );
 
 
+            builder.Services.ConfigureApplicationCookie(
+                config =>
+                config.LoginPath = "/Account/SignIn"
+
+                );
 
             var app = builder.Build();
 
@@ -80,6 +89,10 @@ namespace Company.Go5.PLMVC
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseAuthorization();
+
+
+
 
             app.MapStaticAssets();
             app.MapControllerRoute(

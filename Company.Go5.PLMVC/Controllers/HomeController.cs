@@ -1,9 +1,14 @@
 using System.Diagnostics;
 using Company.Go5.PLMVC.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Company.Go5.PLMVC.Controllers
 {
+
+    //[AllowAnonymous]
+
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

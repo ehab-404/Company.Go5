@@ -5,10 +5,12 @@ using Company.Go5.BLL.Repositories;
 using Company.Go5.DAL.Models;
 using Company.Go5.PLMVC.Dtos;
 using Humanizer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Company.Go5.PLMVC.Controllers
 {
+    [Authorize]
     public class DepartmentController : Controller
     {
         private readonly IDepartmentRepository _departmentRepository;
