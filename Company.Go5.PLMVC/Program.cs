@@ -34,7 +34,8 @@ namespace Company.Go5.PLMVC
             builder.Services.AddAutoMapper(m=>m.AddProfile(new EmployeeProfile() )  );
 
             builder.Services.AddIdentity<AppUser, IdentityRole>()
-                .AddEntityFrameworkStores<CompanyDbContext>();
+                .AddEntityFrameworkStores<CompanyDbContext>()
+                .AddDefaultTokenProviders();
 
 
 
