@@ -14,9 +14,16 @@
 
 <form asp-action="Edit" method="post"  enctype="multipart/form-data">
 
-	<partial name="RolePartialView/_EditCreatePartail" model="Model" />
+	<partial name="RolePartialView/_EditCreatePartail" model="@Model" />
 
         <div class="my-3">
+
+        <a asp-action="AddOrRemoveUser" asp-route-RoleId="@Model.Id" asp-controller="Role" class="btn btn-Success">
+            
+            Add Or Remove User 
+
+        </a>
+
 
         <input type="submit" value="update and Save" class="btn btn-warning" />
         <a asp-action="Index" asp-controller="Role"  class="btn btn-light">Back to List</a>
