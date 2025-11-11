@@ -164,6 +164,8 @@ namespace Company.Go5.PLMVC.Controllers
            // ViewBag.Departments = _departmentRepository.GetAll();
             ViewBag.Departments =await unitOfWork.departmentRepository.GetAllAsync();
 
+
+
             return View(employeeDto);
         }
 

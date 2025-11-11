@@ -89,17 +89,21 @@ namespace Company.Go5.PLMVC
             app.UseHttpsRedirection();
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
 
 
             app.MapStaticAssets();
+
+            //to add pattern of routes 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}")
                 .WithStaticAssets();
+
+
 
             app.Run();
         }

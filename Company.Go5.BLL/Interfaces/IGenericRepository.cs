@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Company.Go5.DAL.Models;
 
 namespace Company.Go5.BLL.Interfaces
-{
+{   
     public interface IGenericRepository<T> where T : Entity
     {
 
