@@ -1,6 +1,7 @@
 ﻿@model DepartmentDto
 @{
     ViewData["Title"] = "Details";
+    var id = TempData["id"];
 }
 
 <h1>Details</h1>
@@ -14,7 +15,7 @@
 
         <a asp-action="Index" class="btn btn-primary">Back To List</a>
 
-        <a asp-action="Edit" class="btn btn-warning">Edit</a>
+        <a asp-action="Edit" asp-route-id="@id" class="btn btn-warning">Edit</a>
 
     </div>
 

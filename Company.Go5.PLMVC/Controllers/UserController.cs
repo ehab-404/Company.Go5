@@ -98,8 +98,56 @@ namespace Company.Go5.PLMVC.Controllers
         }
 
 
-      
-       
+
+
+
+        [HttpGet]
+
+        public IActionResult Create()
+        {
+
+            return View();
+
+        }
+
+
+
+        [HttpPost]
+
+        public async Task<IActionResult> Create(UserToReturnDto userDto)
+        {
+            if (userDto is null) { return BadRequest("user dto is null "); }
+
+            var user = new AppUser()
+            {
+
+
+                UserName = userDto.UserName,
+                FirstName = userDto.FirstName,
+                LastName = userDto.LastName,
+                Email = userDto.Email,
+
+
+
+
+            };
+
+            await _userManager.CreateAsync(user);
+
+            await _userManager.UpdateAsync(user);
+
+            return RedirectToAction(nameof(Index));
+
+        }
+
+
+
+
+
+
+
+
+
         [HttpGet]
         public async Task<IActionResult> EditForm(string? id)
         {
@@ -113,6 +161,8 @@ namespace Company.Go5.PLMVC.Controllers
             {
                 return NotFound();
             }
+
+            ViewBag.id = id;
 
             var UserDto = new UserToReturnDto()
             {

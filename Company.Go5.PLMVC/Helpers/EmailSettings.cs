@@ -16,7 +16,7 @@ namespace Company.Go5.PLMVC.Helpers
 
                 client.EnableSsl = true;
                 client.Credentials = new NetworkCredential("popehab057@gmail.com",
-                    "");
+                    "akxgrknnydrtltzx");
 
                 //  myzdmnfbyysdbwwr :ex for  your app password of your gmail 
 

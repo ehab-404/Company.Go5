@@ -1,7 +1,8 @@
 ﻿@model RoleToReturn
 @{
     ViewData["Title"] = "Edit";
-    
+    var id = ViewData["id"] as string;
+
 }
 
 <h1>Edit</h1>
@@ -12,13 +13,13 @@
 <br />
 
 
-<form asp-action="Edit" method="post"  enctype="multipart/form-data">
+<form asp-action="Edit" method="post" asp-route-id="@Model.Id"  enctype="multipart/form-data">
 
 	<partial name="RolePartialView/_EditCreatePartail" model="@Model" />
 
         <div class="my-3">
 
-        <a asp-action="AddOrRemoveUser" asp-route-RoleId="@Model.Id" asp-controller="Role" class="btn btn-Success">
+        <a asp-action="AddOrRemoveUser" asp-route-RoleId="@Model.Id" asp-route-inRoleDtos="@Model" asp-controller="Role" class="btn btn-Success">
             
             Add Or Remove User 
 

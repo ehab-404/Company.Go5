@@ -143,8 +143,8 @@ namespace Company.Go5.PLMVC.Controllers
 
             }
 
-            return BadRequest();
-                
+            return RedirectToAction("Index");
+
         }
 
 
@@ -180,6 +180,8 @@ namespace Company.Go5.PLMVC.Controllers
                 Id = role.Id,
                 Name = role.Name
             };
+
+            ViewData["id"] = id;
 
 
 
@@ -300,7 +302,9 @@ namespace Company.Go5.PLMVC.Controllers
 
                 users_in_role.Add(userInRole);
 
+
             }
+
 
             return View(users_in_role);
 
@@ -309,10 +313,10 @@ namespace Company.Go5.PLMVC.Controllers
 
         [HttpPost]
 
-        public async Task<IActionResult> AddOrRemoveUser(IEnumerable<UserInRoleDto> inRoleDtos , string RoleId)
+        public async Task<IActionResult> AddOrRemoveUser(string RoleId , List<UserInRoleDto> users )
 
         {
-
+           
 
             var role = await _roleManager.FindByIdAsync(RoleId);
 
@@ -321,7 +325,7 @@ namespace Company.Go5.PLMVC.Controllers
 
             if (ModelState.IsValid)
             {
-                foreach(var user in inRoleDtos)
+                foreach(var user in users)
                 {
                     var appuser = await _userManager.FindByIdAsync(user.UserId);
 
@@ -357,12 +361,12 @@ namespace Company.Go5.PLMVC.Controllers
 
 
 
-                return RedirectToAction(nameof(Edit), new {id=role.Id});
+                return RedirectToAction(nameof(EditForm), new {id=role.Id});
 
 
 
             }
-            return View(inRoleDtos);
+            return View(users);
 
         }
 

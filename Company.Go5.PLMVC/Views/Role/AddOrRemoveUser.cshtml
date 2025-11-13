@@ -8,34 +8,30 @@
 	ViewData["Title"] = "AddOrRemoveUser";
 	Layout = "~/Views/Shared/_Layout.cshtml";
 
-	var RoleId = @ViewData["RoleId"] as string;
+	var RoleId = ViewData["RoleId"] as string;
+	
 
 
 }
 
 
-<form asp-action="AddOrRemoveUser" asp-route-RoleId="RoleId" method="post" enctype="multipart/form-data">
+<form asp-action="AddOrRemoveUser" asp-route-RoleId="@RoleId"   method="post" enctype="multipart/form-data">
 
 
-	@foreach (var user in Model)
+	@for (int i = 0; i < Model.Count; i++)
 	{
 		<div class="form-group">
-
-			<input asp-for="@user.IsSelected" />
-			<label asp-for="@user.IsSelected"> @user.UserName	 </label>
-
+			<input asp-for="@Model[i].IsSelected" />
+			<label asp-for="@Model[i].IsSelected">@Model[i].UserName</label>
 		</div>
-
-
-		<input type="hidden" asp-for="@user.UserName" />
-		<input type="hidden" asp-for="@user.UserId" />
-
+		<input asp-for="@Model[i].UserName" type="hidden" />
+		<input asp-for="@Model[i].UserId" type="hidden" />
 	}
 
 
 	<input type="submit" value="update and Save" class="btn btn-warning" />
 
-	<a asp-action="Edit" asp-route-Id="RoleId" class="btn btn-light"> cancel </a>
+	<a asp-action="Edit" asp-route-Id="@RoleId" class="btn btn-light"> cancel </a>
 
 </form>
 

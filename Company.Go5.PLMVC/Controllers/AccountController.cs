@@ -152,11 +152,7 @@ namespace Company.Go5.PLMVC.Controllers
         #endregion
 
 
-        #region SignOut
-
-        #endregion
-
-
+       
 
 
         #region forget password

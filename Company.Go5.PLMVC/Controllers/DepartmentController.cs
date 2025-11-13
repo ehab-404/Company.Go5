@@ -90,6 +90,7 @@ namespace Company.Go5.PLMVC.Controllers
 
         public async Task<IActionResult> Details(int?id)
         {
+            TempData["id"] = id;
 
             if(id is null) { return BadRequest("id required "); }
 
