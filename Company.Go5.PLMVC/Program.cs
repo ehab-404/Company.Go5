@@ -86,7 +86,7 @@ namespace Company.Go5.PLMVC
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+           // app.UseHttpsRedirection();
             app.UseRouting();
 
             app.UseAuthentication();

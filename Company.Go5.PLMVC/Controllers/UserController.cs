@@ -5,6 +5,7 @@ using Company.Go5.PLMVC.Dtos;
 using Company.Go5.PLMVC.Helpers;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Company.Go5.PLMVC.Controllers
 {
@@ -19,47 +20,44 @@ namespace Company.Go5.PLMVC.Controllers
 
         public async Task<IActionResult> Index(string? SearchInput)
         {
-            IEnumerable<UserToReturnDto> users;
+            var users =  await _userManager.Users.ToListAsync();
 
-
-            if (string.IsNullOrEmpty(SearchInput))
+            if (!string.IsNullOrEmpty(SearchInput))
             {
 
-                 users = _userManager.Users.Select(u => new UserToReturnDto()
-                {
-                    Id = u.Id,
-                    UserName = u.UserName,
-                    FirstName = u.FirstName,
-                    LastName = u.LastName,
-                    Email = u.Email,
-                    Roles = _userManager.GetRolesAsync(u).Result
 
-                });
-
-
-             }
-
-            else
-            {
-
-                users = _userManager.Users.Select(u => new UserToReturnDto()
-                {
-                    Id = u.Id,
-                    UserName = u.UserName,
-                    FirstName = u.FirstName,
-                    LastName = u.LastName,
-                    Email = u.Email,
-                    Roles = _userManager.GetRolesAsync(u).Result
-
-                }).Where(u => u.FirstName.ToLower().Contains(SearchInput.ToLower()));
-
-
-
+                users = users.Where(u => u.FirstName.ToLower().Contains(SearchInput.ToLower())).ToList();
 
 
             }
 
-            return View(users);
+            var result = new List<UserToReturnDto>();
+
+            foreach(var u in users)
+            {
+
+                var roles = await _userManager.GetRolesAsync(u);
+                result.Add(new UserToReturnDto()
+                {
+
+                    Id = u.Id,
+                    UserName = u.UserName,
+                    FirstName = u.FirstName,
+                    LastName = u.LastName,
+                    Email = u.Email,
+                    Roles = roles.ToList()
+
+
+                });
+
+            }
+                
+
+
+
+            
+
+            return View(result);
         }
 
 
@@ -226,7 +224,7 @@ namespace Company.Go5.PLMVC.Controllers
                 var user = await _userManager.FindByIdAsync(id);
 
                 if (user is null) { return NotFound(); }
-
+          
             var userdto = new UserToReturnDto()
             {
 

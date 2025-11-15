@@ -41,7 +41,7 @@
 
 
 
-@if (  Model is not null & Model.Count() > 0)
+@if (  Model is not null @* & Model.Count() > 0 *@)
 {
     <table class=" table table-hover table-striped">
 

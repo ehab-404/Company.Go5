@@ -295,6 +295,21 @@ namespace Company.Go5.PLMVC.Controllers
         #endregion
 
 
+
+        #region signout
+
+
+        public new async Task<IActionResult> SignOut()
+        {
+
+           await signInManager.SignOutAsync();
+
+            return RedirectToAction(nameof(SignIn));
+        }
+
+        #endregion
+
+
     }
 
 
