@@ -80,6 +80,11 @@ namespace Company.Go5.PLMVC.Controllers
 
             TempData["CreateStatu"]= count;
 
+
+
+
+
+
             return RedirectToAction(nameof(Index) );
 
         }
